@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h> // Incluimos esta librería para usar otro set de caracteres
+#include <string>
 using namespace std;
 
 string evaluarLlave(bool llave){
@@ -11,13 +12,26 @@ string evaluarLlave(bool llave){
     }
     return tieneLlave;
 }
+ 
+string mostrarFichaTecnica(string nombre,int vida, float danio, float armadura, bool llave){
+    string respuesta = "";
+    cout << "\n" << endl;
+    cout << "Ficha Técnica" << endl;
+    cout << "=============" << endl;
+    cout << "Nombre: " << nombre << endl;
+    cout << "Vida: " << to_string(vida) << endl;
+    cout << "Daño: " << to_string(danio) << endl;
+    cout << "Armadura: " << to_string(armadura) << endl;
+    cout << "Llave: " << evaluarLlave(llave) << endl;
+    return respuesta;
+}
 
 
 int main(){
     // Defino el set de caracteres UTF-8 (latino) para la salida de la consola
     SetConsoleOutputCP(CP_UTF8);
 
-    string nombre = "Torch";
+    string nombre = "";
     int vida = 500;
     float danio = 50;
     float armadura = 60;
@@ -37,28 +51,17 @@ int main(){
         mediante el TERMINAL
     */
 
-    cout << "\n" << endl;
-    cout << "Ficha Técnica" << endl;
-    cout << "=============" << endl;
-    cout << "Nombre: " << nombre << endl;
-    cout << "Vida: " << vida << endl;
-    cout << "Daño: " << danio << endl;
-    cout << "Armadura: " << armadura << endl;
-    cout << "Llave: " << evaluarLlave(llave) << endl;
+    mostrarFichaTecnica(nombre,vida,danio,armadura,llave);
 
     cout << "\n" << endl;
-    cout << "Recibimos 100 daño!" << endl;
-    vida = vida - 100;
+    int danioRecibido = 0;
+    cout << "Ingrese el daño..." << endl;
+    cin >> danioRecibido;
+    cout << "Recibimos "<< danioRecibido <<" de daño!" << endl;
+    vida = vida - danioRecibido;
     llave = true;
 
-    cout << "\n" << endl;
-    cout << "Ficha Técnica" << endl;
-    cout << "=============" << endl;
-    cout << "Nombre: " << nombre << endl;
-    cout << "Vida: " << vida << endl;
-    cout << "Daño: " << danio << endl;
-    cout << "Armadura: " << armadura << endl;
-    cout << "Llave: " << evaluarLlave(llave) << endl;
+    mostrarFichaTecnica(nombre,vida,danio,armadura,llave);
 
     return 0;
 }

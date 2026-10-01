@@ -2,40 +2,46 @@
 #include <windows.h>
 using namespace std;
 
-// Variables GLOBALES, están disponibles en cualquier parte del código
-string nombre = "";
-int vida = 100;
-bool vivo = true;
+class Personaje
+{
+    private:
+        string nombre;
+        int vida;
+        bool vivo;
+        
+    public:
+        Personaje(string nombrePersonaje, int vidaPersonaje, bool personajeVivo):
+            nombre(nombrePersonaje),vida(vidaPersonaje),vivo(personajeVivo){}
+        
+            void avanzar(){
+                cout << nombre << " avanza..." << endl;
+            }
 
-// Una función VOID (vacío) no deberá retornar ningún tipo de dato, sólo debe hacer una tarea
-void avanzar(){
-    cout << nombre << " avanza..." << endl;
-}
+            void saltar(){
+                cout << nombre << " salta..." << endl;
+            }
 
-void saltar(){
-    cout << nombre << " salta..." << endl;
-}
+            void recibirDanio(int danioJugador){
+                // Modo clásico de realizar una sustracción
+                // vida = vida - danio;
+                vida -= danioJugador;
 
-void recibirDanio(int danioJugador){
-    // Modo clásico de realizar una sustracción
-    // vida = vida - danio;
-    vida -= danioJugador;
+                cout << nombre << " fue atacado con " << danioJugador << " de daño." << endl;
+                cout << nombre << " tiene " << vida << " de vida restante." << endl;
 
-    cout << nombre << " fue atacado con " << danioJugador << " de daño." << endl;
-    cout << nombre << " tiene " << vida << " de vida restante." << endl;
+                if(vida <= 0){
+                    vivo = false;
+                    vida = 0;
+                    cout << "GAME OVER!" << endl;
+                }
+            }
 
-    if(vida <= 0){
-        vivo = false;
-        vida = 0;
-        cout << "GAME OVER!" << endl;
-    }
-}
-
-void verEstado(){
-    cout << "Estado de " << nombre << endl;
-    cout << "Vida: " << vida << endl;
-    cout << "Está vivo?: " << (vivo ? "Si" : "No") << endl;
-}
+            void verEstado(){
+                cout << "Estado de " << nombre << endl;
+                cout << "Vida: " << vida << endl;
+                cout << "Está vivo?: " << (vivo ? "Si" : "No") << endl;
+            }
+};
 
 int main(){
     SetConsoleOutputCP(CP_UTF8);

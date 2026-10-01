@@ -1,17 +1,19 @@
 #include <iostream>
 #include <windows.h>
+#include <string>
 using namespace std;
 
 // Clase PADRE o SUPERCLASE
 class Personaje
 {
-private:
+protected:
     string nombre;
     int vida;
     bool vivo;
 
 public:
-    Personaje(string nombrePersonaje, int vidaPersonaje, bool personajeVivo) : nombre(nombrePersonaje), vida(vidaPersonaje), vivo(personajeVivo) {}
+    Personaje(string nombrePersonaje, int vidaPersonaje, bool personajeVivo) : 
+        nombre(nombrePersonaje), vida(vidaPersonaje), vivo(personajeVivo) {}
 
     void avanzar()
     {
@@ -55,7 +57,13 @@ private:
     string arma;
 
 public:
-    Guerrero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : Personaje(nombrePersonaje, vidaPersonaje, personajeVivo), arma(nombreArma) {}
+    Guerrero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+        
+    void atacar()
+    {
+        cout << nombre << " golpea con su " << arma << endl;
+    }
 };
 
 class Mago : public Personaje
@@ -64,7 +72,13 @@ private:
     string arma;
 
 public:
-    Mago(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : Personaje(nombrePersonaje, vidaPersonaje, personajeVivo), arma(nombreArma) {}
+    Mago(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+
+    void atacar()
+    {
+        cout << nombre << " arroja un hechizo con su " << arma << endl;
+    }
 };
 
 class Arquero : public Personaje
@@ -73,7 +87,13 @@ private:
     string arma;
 
 public:
-    Arquero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : Personaje(nombrePersonaje, vidaPersonaje, personajeVivo), arma(nombreArma) {}
+    Arquero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+    
+    void atacar()
+    {
+        cout << nombre << " dispara con su " << arma << endl;
+    }
 };
 
 int main()
@@ -85,6 +105,7 @@ int main()
     int tipoPersonaje;
     string nombre;
     bool vivo = true;
+    Personaje* jugador = nullptr;
 
     cout << "Cuál es el nombre de su personaje?: " << endl;
     getline(cin, nombre);
@@ -92,9 +113,7 @@ int main()
     cout << "Cuál será la vida de " << nombre << "?:" << endl;
     cin >> vida;
 
-    Personaje jugador(nombre,vida,vivo);
-
-    cout << "Qué tipo de personaje constriremos?:" << endl;
+    cout << "Qué tipo de personaje construiremos?:" << endl;
     cout << "[1] Guerrero" << endl;
     cout << "[2] Mago" << endl;
     cout << "[3] Arquero" << endl;
@@ -103,13 +122,13 @@ int main()
     switch (tipoPersonaje)
     {
         case 1:
-            Guerrero guerrero(jugador,"Espada");
+            jugador = new Guerrero(nombre,vida,vivo,"Espada");
             break;
         case 2:
-            Mago jugador(nombre,vida,vivo,"Báculo");
+            jugador = new Mago(nombre,vida,vivo,"Báculo");
             break;
         case 3:
-            Arquero jugador(nombre,vida,vivo,"Arco");
+            jugador = new Arquero(nombre,vida,vivo,"Arco");
             break;
         
         default:
@@ -141,18 +160,18 @@ int main()
         switch (opcion)
         {
         case 1:
-            jugador.avanzar();
+            jugador->avanzar();
             break;
         case 2:
-            jugador.saltar();
+            jugador->saltar();
             break;
         case 3:
             cout << "Ingrese el daño a recibir: " << endl;
             cin >> danio;
-            jugador.recibirDanio(danio);
+            jugador->recibirDanio(danio);
             break;
         case 4:
-            jugador.verEstado();
+            jugador->verEstado();
             break;
         case 5:
             exit(0);

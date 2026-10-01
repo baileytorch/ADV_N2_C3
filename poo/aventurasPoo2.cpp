@@ -46,10 +46,23 @@ class Personaje
 int main(){
     SetConsoleOutputCP(CP_UTF8);
     int opcion = 0;
+
+    // Iniciamos variables para asignárselas a los objetos
     int danio = 0;
+    int vida;
+    string nombre;
+    bool vivo = true;
 
     cout << "Cuál es el nombre de su personaje?: " << endl;
-    cin >> nombre;
+    getline(cin, nombre);
+
+    cout << "Cuál será la vida de " << nombre << "?:" << endl;
+    cin >> vida;
+
+    // Instancia de CLASE
+    Personaje jugador(nombre,vida,vivo);
+    Personaje jugador2("Delfín Quispe",100,true);
+    Personaje jugador3("Wendy Sulca",100,true);
 
     cout << "\nAventuras de " << nombre << endl;
     while (opcion != 5 && vivo)
@@ -74,18 +87,18 @@ int main(){
         switch (opcion)
         {
             case 1:
-                avanzar();
+                jugador.avanzar();
                 break;
             case 2:
-                saltar();
+                jugador.saltar();
                 break;
             case 3:
                 cout << "Ingrese el daño a recibir: " << endl;
                 cin >> danio;
-                recibirDanio(danio);
+                jugador.recibirDanio(danio);
                 break;
             case 4:
-                verEstado();
+                jugador.verEstado();
                 break;
             case 5:
                 exit(0);

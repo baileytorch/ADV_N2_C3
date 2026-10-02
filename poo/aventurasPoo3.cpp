@@ -6,94 +6,99 @@ using namespace std;
 // Clase PADRE o SUPERCLASE
 class Personaje
 {
-protected:
-    string nombre;
-    int vida;
-    bool vivo;
+    protected:
+        string nombre;
+        int vida;
+        bool vivo;
 
-public:
-    Personaje(string nombrePersonaje, int vidaPersonaje, bool personajeVivo) : 
-        nombre(nombrePersonaje), vida(vidaPersonaje), vivo(personajeVivo) {}
+    public:
+        Personaje(string nombrePersonaje, int vidaPersonaje, bool personajeVivo) : 
+            nombre(nombrePersonaje), vida(vidaPersonaje), vivo(personajeVivo) {}
 
-    void avanzar()
-    {
-        cout << nombre << " avanza..." << endl;
-    }
-
-    void saltar()
-    {
-        cout << nombre << " salta..." << endl;
-    }
-
-    void recibirDanio(int danioJugador)
-    {
-        // Modo clásico de realizar una sustracción
-        // vida = vida - danio;
-        vida -= danioJugador;
-
-        cout << nombre << " fue atacado con " << danioJugador << " de daño." << endl;
-        cout << nombre << " tiene " << vida << " de vida restante." << endl;
-
-        if (vida <= 0)
+        void avanzar()
         {
-            vivo = false;
-            vida = 0;
-            cout << "GAME OVER!" << endl;
+            cout << nombre << " avanza..." << endl;
         }
-    }
 
-    void verEstado()
-    {
-        cout << "Estado de " << nombre << endl;
-        cout << "Vida: " << vida << endl;
-        cout << "Está vivo?: " << (vivo ? "Si" : "No") << endl;
-    }
+        void saltar()
+        {
+            cout << nombre << " salta..." << endl;
+        }
+
+        void recibirDanio(int danioJugador)
+        {
+            // Modo clásico de realizar una sustracción
+            // vida = vida - danio;
+            vida -= danioJugador;
+
+            cout << nombre << " fue atacado con " << danioJugador << " de daño." << endl;
+            cout << nombre << " tiene " << vida << " de vida restante." << endl;
+
+            if (vida <= 0)
+            {
+                vivo = false;
+                vida = 0;
+                cout << "GAME OVER!" << endl;
+            }
+        }
+
+        void verEstado()
+        {
+            cout << "Estado de " << nombre << endl;
+            cout << "Vida: " << vida << endl;
+            cout << "Está vivo?: " << (vivo ? "Si" : "No") << endl;
+        }
+
+        virtual void atacar()
+        {
+            cout << nombre << " ataca. " << endl;
+        }
 };
 
 // Clases HIJA o SUBCLASE
 class Guerrero : public Personaje
 {
-private:
-    string arma;
+    private:
+        string arma;
 
-public:
-    Guerrero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
-        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
-        
-    void atacar()
-    {
-        cout << nombre << " golpea con su " << arma << endl;
-    }
+    public:
+        Guerrero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+            Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+            
+        void atacar() override
+        {
+            cout << nombre << " golpea con su " << arma << endl;
+        }
 };
 
 class Mago : public Personaje
 {
-private:
-    string arma;
+    private:
+        string arma;
 
-public:
-    Mago(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
-        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+    public:
+        Mago(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+            Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
 
-    void atacar()
-    {
-        cout << nombre << " arroja un hechizo con su " << arma << endl;
-    }
+        void atacar() override
+        {
+            cout << nombre << " arroja un hechizo con su " << arma << endl;
+        }
 };
 
 class Arquero : public Personaje
 {
-private:
-    string arma;
+    private:
+        string arma;
 
-public:
-    Arquero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
-        Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
-    
-    void atacar()
-    {
-        cout << nombre << " dispara con su " << arma << endl;
-    }
+    public:
+        Arquero(string nombrePersonaje, int vidaPersonaje, bool personajeVivo, string nombreArma) : 
+            Personaje(nombrePersonaje,vidaPersonaje,personajeVivo), arma(nombreArma) {}
+        
+        void atacar() override
+        {
+            cout << nombre << " dispara con su " << arma << endl;
+        }
 };
 
 int main()
@@ -142,8 +147,9 @@ int main()
         cout << "[2] Saltar" << endl;
         cout << "[3] Recibir Daño" << endl;
         cout << "[4] Ver estado del personaje" << endl;
-        cout << "[5] Salir" << endl;
-        cout << "\nSeleccione su opción [1-5]:" << endl;
+        cout << "[5] Atacar" << endl;
+        cout << "[6] Salir" << endl;
+        cout << "\nSeleccione su opción [1-6]:" << endl;
         cin >> opcion;
 
         // OPCION espera el ingreso de un número, de lo contrario entra en un estado de error
@@ -174,6 +180,9 @@ int main()
             jugador->verEstado();
             break;
         case 5:
+            jugador->atacar();
+            break;
+        case 6:
             exit(0);
             break;
         default:

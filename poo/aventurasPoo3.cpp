@@ -141,7 +141,7 @@ int main()
     }
 
     cout << "\nAventuras de " << nombre << endl;
-    while (opcion != 5 && vivo)
+    while (opcion != 6 && vivo)
     {
         cout << "[1] Avanzar" << endl;
         cout << "[2] Saltar" << endl;

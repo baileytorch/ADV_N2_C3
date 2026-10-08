@@ -11,8 +11,10 @@ class Item
         string accion;
         int cantidadUsos;
     public:
-        Item(string nombreItem,string accionItem,int cantidadUsoItem):
-            nombre(nombreItem),accion(accionItem),cantidadUsos(cantidadUsoItem){}
+    // Al asignarle valores por defecto a un atributo, podemos crear objetos vacíos
+    // para luego asignarle valores a sus tributos.
+        Item(string nomIt = "", string accIt = "", int cantUs = 0):
+            nombre(nomIt),accion(accIt),cantidadUsos(cantUs){}
         
         string mostrarNombre() const { return nombre; }
 };
@@ -120,6 +122,48 @@ class Arquero : public Personaje
         }
 };
 
+Item recogerItem(){
+    string nombreItem;
+    string accionItem;
+    int usos;
+    int itemSeleccionado;
+
+    cout << "Has encontrado un cofre con algunos objetos...\nEscoge uno de ellos..." << endl;
+    cout << "[1] Flecha Espectral" << endl;
+    cout << "[2] Poción del Ether" << endl;
+    cout << "[3] Menta de Resurrección" << endl;
+    cin >> itemSeleccionado;
+
+    switch (itemSeleccionado)
+    {
+    case 1:
+        nombreItem = "Flecha Espectral";
+        accionItem = "Lanza una flecha que ataca a un enemigo cualquiera con una bomba.";
+        usos = 1;
+        break;
+        
+    case 2:
+        nombreItem = "Poción del Ether";
+        accionItem = "Crea un aura que daña a los enemigos cercanos por 5 segundos.";
+        usos = 3;
+        break;
+        
+    case 3:
+        nombreItem = "Menta de Resurrección";
+        accionItem = "Vuelves a la vida con 100% de HP.";
+        usos = 1;
+        break;
+    
+    default:
+        nombreItem = "Anillo de Bronce";
+        accionItem = "Aumenta la vida en 10%.";
+        usos = 1;
+        break;
+    }
+    Item item(nombreItem,accionItem,usos);
+    return item;
+}
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -130,6 +174,7 @@ int main()
     string nombre;
     bool vivo = true;
     Personaje* jugador = nullptr;
+    Item itemRecibido;
 
     cout << "Cuál es el nombre de su personaje?: " << endl;
     getline(cin, nombre);
@@ -160,14 +205,15 @@ int main()
     }
 
     cout << "\nAventuras de " << nombre << endl;
-    while (opcion != 6 && vivo)
+    while (opcion != 7 && vivo)
     {
         cout << "[1] Avanzar" << endl;
         cout << "[2] Saltar" << endl;
         cout << "[3] Recibir Daño" << endl;
         cout << "[4] Ver estado del personaje" << endl;
         cout << "[5] Atacar" << endl;
-        cout << "[6] Salir" << endl;
+        cout << "[6] Abrir cofe" << endl;
+        cout << "[7] Salir" << endl;
         cout << "\nSeleccione su opción [1-6]:" << endl;
         cin >> opcion;
 
@@ -202,6 +248,10 @@ int main()
             jugador->atacar();
             break;
         case 6:
+            itemRecibido = recogerItem();
+            jugador->agregarItem(itemRecibido);
+            break;
+        case 7:
             exit(0);
             break;
         default:

@@ -67,7 +67,7 @@ class Guerrero : public Personaje
             
         void atacar() override
         {
-            cout << nombre << " golpea con su " << arma << endl;
+            cout << nombre << " golpea con su " << arma << "\n" << endl;
         }
 };
 
@@ -82,7 +82,7 @@ class Mago : public Personaje
 
         void atacar() override
         {
-            cout << nombre << " arroja un hechizo con su " << arma << endl;
+            cout << nombre << " arroja un hechizo con su " << arma << "\n"  << endl;
         }
 };
 
@@ -97,7 +97,7 @@ class Arquero : public Personaje
         
         void atacar() override
         {
-            cout << nombre << " dispara con su " << arma << endl;
+            cout << nombre << " dispara con su " << arma << "\n"  << endl;
         }
 };
 

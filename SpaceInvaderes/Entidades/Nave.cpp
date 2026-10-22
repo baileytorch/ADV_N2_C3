@@ -1,31 +1,38 @@
-#ifndef NAVE_H
-#define NAVE_H
+#include "Nave.h"
 
-#include <string>
-using namespace std;
+Nave::Nave(string nom, int vid, int atk){
+    this->nombre = nom;
+    this->vida = vid;
+    this->ataque = atk;
+}
 
-class Nave
-{
-protected:
-    string nombre;
-    int vida;
-    int ataque;
+Nave::~Nave(){}
 
-public:
-    Nave(string NombreNave, int vidaNave, int ataqueNave);
-    virtual ~Nave();
+void Nave::recibirDanio(int danio){
+    vida -= danio;
 
-    virtual void disparar(Nave objetivo);
+    if (vida < 0)
+    {
+        vida = 0;
+    }    
+}
 
-    void recibirDanio(int danio);
+bool Nave::estaViva() const{
+    if(vida > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
 
-    bool estaViva() const;
+string Nave::getNombre() const{
+    return nombre;
+}
 
-    string getNombre() const;
+int Nave::getVida() const{
+    return vida;
+}
 
-    int getVida() const;
-
-    int getAtaque() const;
-};
-
-#endif
+int Nave::getAtaque() const{
+    return ataque;
+}

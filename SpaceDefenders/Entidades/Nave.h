@@ -15,7 +15,7 @@ public:
     Nave(string NombreNave, int vidaNave, int ataqueNave);
     virtual ~Nave();
 
-    virtual void disparar(Nave objetivo);
+    virtual void disparar(Nave& objetivo);
 
     void recibirDanio(int danio);
 

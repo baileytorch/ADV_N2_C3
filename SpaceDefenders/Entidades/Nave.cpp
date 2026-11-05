@@ -1,4 +1,7 @@
 #include "Nave.h"
+#include <iostream>
+
+using namespace std;
 
 Nave::Nave(string nom, int vid, int atk){
     this->nombre = nom;
@@ -15,6 +18,12 @@ void Nave::recibirDanio(int danio){
     {
         vida = 0;
     }    
+}
+
+void Nave::verEstado() const{
+    cout << "Nombre: " << nombre << endl;
+    cout << "Vida: " << vida << endl;
+    cout << "Ataque: " << ataque << endl;
 }
 
 bool Nave::estaViva() const{

@@ -19,6 +19,8 @@ public:
 
     void recibirDanio(int danio);
 
+    void verEstado() const;
+
     bool estaViva() const;
 
     string getNombre() const;

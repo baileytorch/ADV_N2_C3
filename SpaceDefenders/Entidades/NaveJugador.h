@@ -9,7 +9,7 @@ private:
     int escudo;
 
 public:
-    NaveJugador(string nombre);
+    NaveJugador(string nombre, int vida, int ataque, int escudo);
     
     void disparar(Nave& objetivo) override;
 

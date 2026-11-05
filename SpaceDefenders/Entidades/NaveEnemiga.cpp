@@ -1,23 +1,30 @@
 #include "NaveEnemiga.h"
 #include <iostream>
 #include "NaveJugador.h"
+#include <string>
 
 using namespace std;
 
-NaveEnemiga::NaveEnemiga(string nombre, int vida, int ataque):
-Nave(nombre, vida, ataque){}
+NaveEnemiga::NaveEnemiga(string nombre, int vida, int ataque) : Nave(nombre, vida, ataque) {}
 
-void NaveEnemiga::disparar(Nave& objetivo){
+void NaveEnemiga::disparar(Nave &objetivo)
+{
     cout << nombre << " ataca a " << objetivo.getNombre() << endl;
 
-    if (NaveJugador* jugador = dynamic_cast<NaveJugador*>(&objetivo)) {
-        int escudo = jugador->getEscudo();
-        if (escudo > 0)
+    cout << "Desea usar el escudo del jugador para bloquear el ataque? (s/n): ";
+    char respuesta;
+
+    cin >> respuesta;
+
+    if (respuesta == 's')
+    {
+        if (NaveJugador *jugador = dynamic_cast<NaveJugador *>(&objetivo))
         {
             jugador->usarEscudo(ataque);
-        }else{
-            jugador->recibirDanio(ataque);
         }
     }
-    
+    else
+    {
+        objetivo.recibirDanio(ataque);
+    }
 }

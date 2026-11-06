@@ -10,9 +10,11 @@ using namespace std;
 class Juego {
     private:
         NaveJugador jugador;
-        vector<NaveEnemiga *> navesEnemigas;
+        vector<NaveEnemiga *> enemigos;
+
     public:
         Juego();
+        
         void iniciar();
 };
 

@@ -17,13 +17,13 @@ void Juego::iniciar()
     while (numEnemigos < 11)
     {
         string nombreEnemigo = "Nave Enemiga " + to_string(numEnemigos);
-        navesEnemigas.push_back(new NaveEnemiga(nombreEnemigo, 50, 10));
+        enemigos.push_back(new NaveEnemiga(nombreEnemigo, 50, 10));
         numEnemigos++;
     }
 
-    navesEnemigas.push_back(new NaveEnemiga("Invader", 200, 30));
+    enemigos.push_back(new NaveEnemiga("Invader", 200, 30));
 
-    for (NaveEnemiga *enemigo : navesEnemigas)
+    for (NaveEnemiga *enemigo : enemigos)
     {
         cout << "¡Un enemigo ha aparecido! " << enemigo->getNombre() << endl;
 
